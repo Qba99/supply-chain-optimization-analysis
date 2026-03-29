@@ -1,0 +1,29 @@
+DATA PREPARATION SUMMARY
+=============================================
+Raw dataset:     100 rows x 24 columns
+Cleaned dataset: 100 rows x 38 columns
+Rows removed:    0 (no rows were dropped)
+New columns:     14
+
+Transformations applied:
+  1. Column names standardised to snake_case
+  2. Ambiguous columns renamed: lead_times -> order_lead_time,
+     lead_time -> supplier_lead_time, costs -> total_supply_chain_costs
+  3. Categorical columns cast to pd.Categorical
+  4. inspection_results cast as ordered categorical (Fail < Pending < Pass)
+  5. Numeric columns validated and cast with pd.to_numeric
+
+Engineered features:
+  - cost_per_unit_sold       (Q1: shipping efficiency)
+  - carrier_route_combo      (Q1: grouping label)
+  - total_lead_time          (Q2: supplier performance)
+  - supplier_risk_score      (Q2: composite risk metric)
+  - stock_to_sales_ratio     (Q3: inventory efficiency)
+  - working_capital_at_risk  (Q3: financial exposure)
+
+Outlier flags added for:
+  shipping_costs, defect_rates, total_lead_time,
+  cost_per_unit_sold, stock_to_sales_ratio, total_supply_chain_costs
+
+No rows were removed. Outliers are flagged, not dropped.
+Output saved to: data/cleaned/supply_chain_clean.csv
